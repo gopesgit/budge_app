@@ -5,26 +5,49 @@ export const formatDate = (date) => {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
-export const expenseType = [
-    { label: 'Rent', value: 'Rent' },
+  export const expenseTypes = [
+    // Fixed Expenses
+    { label: 'Rent or Mortgage', value: 'RentOrMortgage' },
     { label: 'Utilities', value: 'Utilities' },
-    { label: 'Insurance Premiums', value: 'Insurance Premiums' },
-    { label: 'Subscription services', value: 'Subscription services' },
-    { label: 'Entertainment', value: 'Entertainment' },
+    { label: 'Insurance Premiums', value: 'InsurancePremiums' },
+    { label: 'Loan Payments', value: 'LoanPayments' },
+    { label: 'Subscription Services', value: 'SubscriptionServices' },
+
+    // Variable Expenses
     { label: 'Groceries', value: 'Groceries' },
+    { label: 'Dining out and Entertainment', value: 'DiningOutAndEntertainment' },
     { label: 'Transportation', value: 'Transportation' },
     { label: 'Shopping', value: 'Shopping' },
-    { label: 'Health', value: 'Health' },
-    { label: 'Wellness', value: 'Wellness' },
-    { label: 'Retirement savings', value: 'Retirement savings' },
-    { label: 'Investment accounts ', value: 'Investment accounts' },
-    { label: 'Credit card payments ', value: 'Credit card payments' },
-    { label: 'Personal loans ', value: 'Personal loans' },
-    { label: 'Travel and vacations ', value: 'Travel and vacations' },
-    { label: 'Hobbies and leisure ', value: 'Hobbies and leisure' },
-    { label: 'Gifts and celebrations ', value: 'Gifts and celebrations' },
-    { label: 'Maintenance', value: 'Maintenance' },
-    { label: 'Miscellaneous', value: 'Miscellaneous' },
-    { label: 'Miscellaneous', value: 'Miscellaneous' },
-    // Add more expense types as needed
+    { label: 'Health and Wellness', value: 'HealthAndWellness' },
+
+    // Savings and Investments
+    { label: 'Retirement Savings', value: 'RetirementSavings' },
+    { label: 'Emergency Fund', value: 'EmergencyFund' },
+    { label: 'Investment Accounts', value: 'InvestmentAccounts' },
+
+    // Debt Repayment
+    { label: 'Credit Card Payments', value: 'CreditCardPayments' },
+    { label: 'Personal Loans', value: 'PersonalLoans' },
+    { label: 'Other Outstanding Debts', value: 'OtherOutstandingDebts' },
+
+    // Discretionary Spending
+    { label: 'Entertainment', value: 'Entertainment' },
+    { label: 'Travel and Vacations', value: 'TravelAndVacations' },
+    { label: 'Hobbies and Leisure Activities', value: 'HobbiesAndLeisureActivities' },
+    { label: 'Gifts and Celebrations', value: 'GiftsAndCelebrations' },
+
+    // Irregular Expenses
+    { label: 'Car Maintenance and Repairs', value: 'CarMaintenanceAndRepairs' },
+    { label: 'Home Repairs and Maintenance', value: 'HomeRepairsAndMaintenance' },
+    { label: 'Annual Fees', value: 'AnnualFees' },
+    { label: 'Gifts for Holidays and Special Occasions', value: 'GiftsForHolidaysAndSpecialOccasions' },
+
+    // Financial Goals
+    { label: 'Saving for a Down Payment on a House', value: 'SavingForADownPaymentOnAHouse' },
+    { label: 'Funding Education Expenses', value: 'FundingEducationExpenses' },
+    { label: 'Starting a Business', value: 'StartingABusiness' },
+    { label: 'Purchasing a Vehicle', value: 'PurchasingAVehicle' },
+
+    // Miscellaneous
+    { label: 'Miscellaneous', value: 'Miscellaneous' }
 ];

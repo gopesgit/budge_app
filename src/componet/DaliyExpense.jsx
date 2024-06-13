@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Dropdown } from 'react-native-element-dropdown';
 import { Button, Icon, Input } from '@rneui/base';
 import { globalStyle } from '../common/style';
-import { expenseType } from '../common/commonFunction';
+import { expenseTypes } from '../common/commonFunction';
 export default function DaliyExpense({ navigation }) {   
     const [crdrType, setcrdrTypeType] = useState([{label:'Lable' ,value:1}])
     return (
@@ -13,7 +13,7 @@ export default function DaliyExpense({ navigation }) {
                 <Text style={globalStyle.boldfont}>Expense Type </Text>
                 <Dropdown
                     style={globalStyle.dropdown}
-                    data={expenseType}
+                    data={expenseTypes}
                     labelField="label"
                     valueField="value"
                     placeholder="Select"
