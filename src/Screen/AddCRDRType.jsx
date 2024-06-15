@@ -78,7 +78,14 @@ const AddCRDRType = () => {
         </View>
       </View>
       <View style={{flex:1}}> 
-            <Text>ok</Text>
+          {fundType && 
+           fundType.map((item,index)=>
+          <View key={index}>
+            <Text>{item.fundname}</Text>
+            <Text>{item.fundtype}</Text>
+          </View>
+          )
+          }
       </View>
       <StatusBar style='auto' />
     </View>
