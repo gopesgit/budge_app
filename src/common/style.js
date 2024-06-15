@@ -2,24 +2,19 @@ import { StyleSheet } from "react-native"
 
 export const globalStyle = StyleSheet.create({
     dropdown: {  
-        width:'85%',           
-        paddingLeft:20,
+        width:'100%',    
+        borderWidth:1,  
+        borderColor:"#999",     
+        paddingLeft:8,
         color: "#af9f85",
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.2,
-        shadowRadius: 1.41,
-        elevation: 2,
+        paddingVertical:2,                
     },
     dorodownContainer:{
-        flexDirection:'row',
-        alignItems:'center',
-        paddingHorizontal:30,
+        flexDirection:'column',       
+        paddingHorizontal:8,
         justifyContent:'center',
-        marginVertical:1,
+        marginVertical:2,
+        gap:8,
         
     },
     boldfont:{
