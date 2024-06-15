@@ -10,14 +10,14 @@ import Income from '../componet/Income';
 const HomeScreen = ({ navigation }) => {
     const [currentDate, setCurrentdate] = useState();
     const [operationmode, setOperationMode] = useState();
-    const showDatePicker = () => {
-        setCurrentdate(new Date());
+    const showDatePicker = () => {           
+        setCurrentdate(formatDate(new Date()));
     }
     return (
         <View style={styles.container}>
             <View >
                 <Input
-                    value={currentDate ? formatDate(currentDate) : ''}
+                    value={currentDate ? currentDate : ''}
                     placeholder='DD/MM/YYYY'
                     inputStyle={{textAlign:'center'}}                    
                     disabled={true}
@@ -53,7 +53,7 @@ const HomeScreen = ({ navigation }) => {
                     onPress={() => setOperationMode("Income")}
                 />
             </View>
-            {operationmode==='Expenses'?<DaliyExpense navigation={navigation}/>:null}
+            {operationmode==='Expenses'?<DaliyExpense navigation={navigation} currentDate={currentDate}/>:null}
             {operationmode==='Transfer'?<BankTransfer navigation={navigation}/>:null}
             {operationmode==='Income'?<Income navigation={navigation}/>:null}
             <StatusBar style='auto'/>

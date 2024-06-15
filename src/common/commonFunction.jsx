@@ -7,9 +7,9 @@ export const formatDate = (date) => {
   };
   export const expenseTypes = [
     // Fixed Expenses
-    { label: 'Rent or Mortgage', value: 'RentOrMortgage' },
+    { label: 'Rent or Mortgage', value: 'Rent Or Mortgage' },
     { label: 'Utilities', value: 'Utilities' },
-    { label: 'Insurance Premiums', value: 'InsurancePremiums' },
+    { label: 'Insurance Premiums', value: 'Insurance Premiums' },
     { label: 'Loan Payments', value: 'LoanPayments' },
     { label: 'Subscription Services', value: 'SubscriptionServices' },
 

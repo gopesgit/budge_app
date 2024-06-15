@@ -13,16 +13,16 @@ const HomeDrawer = () => {
     name='Home'
     component={HomeScreen}
     />
-    <HomeDra.Screen 
+    {/* <HomeDra.Screen 
     name='Expense Type'
     component={AddExpenseType}
-    />
+    /> */}
     <HomeDra.Screen 
     name='Income Type'
     component={AddIncomeType}
     />
     <HomeDra.Screen 
-    name='Cr. & Dr. Type'
+    name='Add Fund Type'
     component={AddCRDRType}
     />
    </HomeDra.Navigator>
