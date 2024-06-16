@@ -1,13 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Dropdown } from 'react-native-element-dropdown'
 import { Input, Icon, Button } from '@rneui/base'
 import { globalStyle } from '../common/style'
+import { DaliyExpenseContext } from '../context/dailyExpense'
 const Income = ({ navigation }) => {
     const [incomeType, setIncomeType] = useState()
-    const [crdrType, setcrdrTypeType] = useState()
+    const { fundType, userData, getUserData } = useContext(DaliyExpenseContext)
+    const [crfund, setCRFund] = useState()
     return (
-        (crdrType && incomeType) ?
+        (fundType && incomeType) ?
             <View>
                 <View style={globalStyle.dorodownContainer}>
                     <Text style={globalStyle.boldfont}>Income Source</Text>
@@ -50,25 +52,27 @@ const Income = ({ navigation }) => {
                     <Text style={globalStyle.boldfont}>Cr. To</Text>
                     <Dropdown
                         style={globalStyle.dropdown}
-                        data={crdrType}
-                        labelField="label"
-                        valueField="value"
+                        data={fundType}
+                        labelField="fundname"
+                        valueField="fundname"
                         placeholder="Select"
+                        value={crfund}
+                        search
                         onChange={(item) => {
-                            console.log("=>", item)
-                            //setToUser(item)
+                            setCRFund(item.fundname)
                         }}
                     />
+                    
 
                 </View>
             </View> :
             <View>               
-                {!crdrType &&
+                {!fundType &&
                     <Button
-                        title={"Add Cr. & Dr. Type"}
+                        title={'Add Fund Type'}
                         size='sm'
                         style={{ marginVertical: 4 }}
-                        onPress={() => navigation.navigate('Cr. & Dr. Type')}
+                        onPress={() => navigation.navigate('Add Fund Type')}
                     />}
             </View>
     )
