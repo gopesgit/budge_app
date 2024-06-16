@@ -22,7 +22,7 @@ const HomeDrawer = () => {
     component={AddIncomeType}
     />
     <HomeDra.Screen 
-    name='Add Fund Type'
+    name='Fund'
     component={AddCRDRType}
     />
    </HomeDra.Navigator>

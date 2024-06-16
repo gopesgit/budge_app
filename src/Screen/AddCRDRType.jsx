@@ -1,10 +1,11 @@
-import { Alert, StatusBar, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { globalStyle } from '../common/style'
 import { Dropdown } from 'react-native-element-dropdown'
-import { Button, Input, Icon } from '@rneui/base'
+import { Button, Input, Icon, ListItem } from '@rneui/base'
 import { DaliyExpenseContext } from '../context/dailyExpense'
 import { addFund } from '../common/daliyExpenseControl'
+import { balanceCalculation } from '../common/commonFunction'
 const AddCRDRType = () => {
   const accountType = [
     { label: "Saving Account", value: "Saving Account" },
@@ -14,9 +15,9 @@ const AddCRDRType = () => {
   const [fundname, setFundName] = useState();
   const [initval, setInitVal] = useState();
   const [fundtype, setFundtype] = useState();
-  const { expenseType, fundType, userData, getUserData } = useContext(DaliyExpenseContext)
+  const { expens, fundType, userData, getUserData } = useContext(DaliyExpenseContext)
   const submitFund = () => {
-    if(!fundname || !initval || !fundtype){
+    if (!fundname || !initval || !fundtype) {
       Alert.alert("Please fill all field")
       return
     }
@@ -26,9 +27,14 @@ const AddCRDRType = () => {
     setInitVal()
     setFundtype()
   }
+  
+  //console.log(expens);
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1,backgroundColor:"#fff"}}>
+      <View style={{marginBottom:8}}>
+          <Button title={"Add New Fund"} onPress={() => submitFund()} color="secondary" />
+        </View>
         <View style={globalStyle.dorodownContainer}>
           <Text style={globalStyle.boldfont}>Account Type</Text>
           <Dropdown
@@ -44,7 +50,7 @@ const AddCRDRType = () => {
             }}
           />
         </View>
-        <View>
+        <View style={{marginTop:12}}>
           <Input
             placeholder='fund like ICICI,SBI,PNB,cash....'
             value={fundname}
@@ -73,19 +79,35 @@ const AddCRDRType = () => {
             }
           />
         </View>
-        <View>
-          <Button title={"Add Fund"} onPress={() => submitFund()} />
-        </View>
+       
       </View>
-      <View style={{flex:1}}> 
-          {fundType && 
-           fundType.map((item,index)=>
-          <View key={index}>
-            <Text>{item.fundname}</Text>
-            <Text>{item.fundtype}</Text>
-          </View>
-          )
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          {fundType &&
+            fundType.map((item, index) =>
+              <ListItem bottomDivider key={index}>                
+                <ListItem.Content>
+                  <ListItem.Title style={globalStyle.boldfont}>
+                    Fund Name: {item.fundname}
+                  </ListItem.Title>
+                  <ListItem.Subtitle>
+                    <View>
+                    <Text>Fund Type: {item.fundtype}</Text>
+                    <Text>Blance Rs. {balanceCalculation(item.fundname,expens)}
+                    
+                    </Text>
+                    </View>
+                 
+                  </ListItem.Subtitle>
+                </ListItem.Content>
+              </ListItem>
+              // <View key={index}>
+              //   <Text>{item.fundname}</Text>
+              //   <Text>{item.fundtype}</Text>
+              // </View>
+            )
           }
+        </ScrollView>
       </View>
       <StatusBar style='auto' />
     </View>

@@ -18,6 +18,18 @@ export const globalStyle = StyleSheet.create({
         
     },
     boldfont:{
+        fontSize:18,
         fontWeight:'bold'
+    },
+    redfontbold:{
+        fontSize:14,
+        fontWeight:'bold',
+        color:"#ff0000",
+    },
+    redfont:{
+        fontSize:14,
+        color:"#ff0000",
     }
+
+
 })

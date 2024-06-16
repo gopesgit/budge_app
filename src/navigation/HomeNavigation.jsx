@@ -13,9 +13,14 @@ const HomeNavigation = () => {
       >
         <TabNavi.Screen
           name="HomeTab"
+          options={{title:"Home"}}
           component={HomeDrawer}
         />
         <TabNavi.Screen
+        options={{
+          title:"Transaction",
+          headerShown:true
+        }}
         name="ExpenseTab"
         component={ExpenseScreen}
         />
