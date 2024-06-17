@@ -7,6 +7,7 @@ import DaliyExpense from "../componet/DaliyExpense";
 export const DaliyExpenseContext=createContext("")
 export const DaliyExpenseProvide=({children})=>{
     const [expenseType,setExpenseType]=useState()
+    const [incomeType,setIncomeType]=useState()
     const [fundType, setfundType] = useState()
     const [expens,setExpense]=useState();
     const [userData,setUserData]=useState();
@@ -14,6 +15,7 @@ export const DaliyExpenseProvide=({children})=>{
     useEffect(()=>{
         console.log("Use Effect");
         getExpenseTypeList()
+        getIncomeTypeList()
         getUserData()
     },[])
     const getExpenseTypeList=async ()=>{
@@ -31,10 +33,25 @@ export const DaliyExpenseProvide=({children})=>{
             console.log(error);
         }
     }
+    const getIncomeTypeList=async ()=>{
+        //console.log("Inside getExpense List");
+        try {
+            const expenseRef=await collection(db,"incomeTypes")
+            const q = await query(expenseRef, orderBy("label","asc"))
+            const querySnapdhot = await getDocs(q)
+            if (!querySnapdhot.empty) {
+                setIncomeType([])
+                const expenseItem=querySnapdhot.docs.map(doc => ({ id: doc.id, ...doc.data() }))  
+                setIncomeType(expenseItem);        
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const getUserData=async ()=>{
         try {
             const expenseRef=await collection(db,"User")
-            const q = await query(expenseRef, where("name","==","Bappa Das"))
+            const q = await query(expenseRef, where("name","==","Gopal Paul"))
             const querySnapdhot = await getDocs(q)
             if (!querySnapdhot.empty) {
                 setfundType([])
@@ -54,8 +71,8 @@ export const DaliyExpenseProvide=({children})=>{
         }
     }
     return(
-        <DaliyExpenseContext.Provider value={{expenseType,fundType,expens,userData,getUserData}}>
-            {children}
+        <DaliyExpenseContext.Provider value={{expenseType,fundType,expens,userData,getUserData,incomeType}}>
+            {children}                                                                                          
         </DaliyExpenseContext.Provider>
     )
 }

@@ -51,7 +51,7 @@ const HomeScreen = ({ navigation }) => {
                 <View style={{ marginVertical: 8 }}>
                     {operationmode === 'Expenses' ? <DaliyExpense navigation={navigation} currentDate={currentDate} /> : null}
                     {operationmode === 'Transfer' ? <BankTransfer navigation={navigation} currentDate={currentDate} /> : null}
-                    {operationmode === 'Income' ? <Income navigation={navigation} /> : null}
+                    {operationmode === 'Income' ? <Income navigation={navigation} currentDate={currentDate} /> : null}
                 </View>
                 <StatusBar style='auto' />
             </View>

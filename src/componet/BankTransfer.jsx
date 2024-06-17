@@ -31,7 +31,7 @@ const BankTransfer = ({ navigation, currentDate }) => {
         setCRFund()
         setDRFund()
         setdesExpense()
-        console.log(data);
+        //console.log(data);
         addExpense(data, userData.id, getUserData);
 
     }

@@ -1,4 +1,4 @@
-import { Alert, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
+import { Alert, KeyboardAvoidingView, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { globalStyle } from '../common/style'
 import { Dropdown } from 'react-native-element-dropdown'
@@ -31,10 +31,11 @@ const AddCRDRType = () => {
   //console.log(expens);
   return (
     <View style={{ flex: 1 }}>
+      
       <View style={{ flex: 1,backgroundColor:"#fff"}}>
-      <View style={{marginBottom:8}}>
-          <Button title={"Add New Fund"} onPress={() => submitFund()} color="secondary" />
-        </View>
+      
+      <KeyboardAvoidingView>
+      
         <View style={globalStyle.dorodownContainer}>
           <Text style={globalStyle.boldfont}>Account Type</Text>
           <Dropdown
@@ -79,8 +80,12 @@ const AddCRDRType = () => {
             }
           />
         </View>
-       
+        <View style={{marginBottom:8}}>
+          <Button title={"Add New Fund"} onPress={() => submitFund()} color="secondary" />
+        </View>
+        </KeyboardAvoidingView>  
       </View>
+     
       <View style={{ flex: 1 }}>
         <ScrollView>
           {fundType &&

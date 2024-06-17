@@ -47,11 +47,8 @@ const TansactionItem = ({ item, deleteExpense }) => {
                     <ListItem.Title style={globalStyle.redfontbold}>{item.description},Rs. {item.ammout}</ListItem.Title>
                     <ListItem.Subtitle style={globalStyle.redfont}>
                         {item.debit_by && `Debit from:${item.debit_by},`}
-                        {item.credit_to && `Debit from:${item.credit_to}`}
-
+                        {item.credit_to && `Credit To:${item.credit_to}`}
                     </ListItem.Subtitle>
-
-
                 </ListItem.Content>
             </ListItem>
         </ListItem.Accordion>
