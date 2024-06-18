@@ -1,13 +1,10 @@
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import { CheckBox, Icon, Input } from '@rneui/base'
+import { Icon, Input,Button } from '@rneui/base'
 import { formatDate } from '../common/commonFunction';
 import DaliyExpense from '../componet/DaliyExpense';
 import BankTransfer from '../componet/BankTransfer';
 import Income from '../componet/Income';
-import { Button } from 'react-native-elements';
-
-
 const HomeScreen = ({ navigation }) => {
     const [currentDate, setCurrentdate] = useState();
     const [operationmode, setOperationMode] = useState();

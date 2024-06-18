@@ -21,6 +21,11 @@ export const globalStyle = StyleSheet.create({
         fontSize:18,
         fontWeight:'bold'
     },
+    boldfontW:{
+        fontSize:20,
+        fontWeight:'bold',
+        color:"#fff",
+    },
     redfontbold:{
         fontSize:14,
         fontWeight:'bold',

@@ -1,9 +1,11 @@
-import { useContext, useState } from 'react'
-import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
+import { useContext, useEffect, useState } from 'react'
+import { KeyboardAvoidingView, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import { DaliyExpenseContext } from '../context/dailyExpense'
 import { delExpense } from '../common/daliyExpenseControl'
 import TansactionItem from '../componet/TansactionItem'
 import { Button, Icon } from '@rneui/base'
+import { globalStyle } from '../common/style'
+import { Dropdown } from 'react-native-element-dropdown'
 
 const ExpenseScreen = () => {
     const { expens, userData, getUserData } = useContext(DaliyExpenseContext)
@@ -12,16 +14,47 @@ const ExpenseScreen = () => {
         delExpense(item, userData.id, getUserData)
 
     }
-    //console.log("lki",expens);
+    const [uniqueTran,setuniqueTran]=useState([])
+    const [tran,setTrantype]=useState("")
+    useEffect(()=>{
+        setuniqueTran()
+        if(expens){
+            const uniqueTran = [...new Set(expens.map(item => item.expense_type))].map(item => ({ label: item, value: item }));
+            setuniqueTran(uniqueTran)
+        }
+       
+       
+    },[expens])
+    //console.log(expens.filter((item)=>item.expense_type===tran));    
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <KeyboardAvoidingView>
+                {expens &&                 
+                <View style={globalStyle.dorodownContainer}>
+                    <Dropdown
+                        style={globalStyle.dropdown}
+                        data={uniqueTran}
+                        labelField="label"
+                        valueField="value"
+                      
+                        placeholder="Select Transaction Type"                        
+                        onChange={(item) => {
+                            console.log("=>", item)
+                            setTrantype(item.value)
+                        }}
+                    />
+                </View>
+                }
+            </KeyboardAvoidingView>
+            <ScrollView style={{padding:8}}>
                 {expens &&
-                    expens.map((item, index) =>
-                        <View style={{borderWidth:1,marginVertical:2,paddingHorizontal:8,paddingBottom:4,borderRadius:4}}>
-                            <TansactionItem item={item} key={index} deleteExpense={deleteExpense}/>                            
+                    tran &&
+                    (expens.filter((item)=>item.expense_type===tran)).map((item, index) =>
+                        <View>
+                            <TansactionItem item={item} key={index} deleteExpense={deleteExpense} />
                         </View>
                     ).reverse()
+                    
                 }
             </ScrollView>
             <StatusBar style='auto' />
@@ -38,18 +71,3 @@ const styles = StyleSheet.create({
     },
 })
 
-// {/* <View key={index} style={{ flexDirection: 'row' }}>
-// <Text>{item.expense_type}</Text>
-// <Text>Rs. {item.ammout}</Text>
-// <Text>Rs. {item.debit_by}</Text>
-// {/* <Text>Rs. {item.description}</Text>
-// <Text>Rs. {item.date}</Text> */}
-// {item.expense_type==='Opening Blance'?null:
-// <Icon
-//     color="#ff0000"
-//     type="material-community"
-//     name="delete-forever"
-//     onPress={() => deleteExpense(item)}
-// />
-// }
-// </View> */}
