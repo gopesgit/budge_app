@@ -17,10 +17,10 @@ const HomeDrawer = () => {
     name='Expense Type'
     component={AddExpenseType}
     /> */}
-    <HomeDra.Screen 
+    {/* <HomeDra.Screen 
     name='Income'
     component={AddIncomeType}
-    />
+    /> */}
     <HomeDra.Screen 
     name='Add Fund Type'
     component={AddCRDRType}

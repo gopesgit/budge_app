@@ -1,32 +1,53 @@
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import { Icon, Input,Button } from '@rneui/base'
+import { Icon, Input, Button } from '@rneui/base'
 import { formatDate } from '../common/commonFunction';
 import DaliyExpense from '../componet/DaliyExpense';
 import BankTransfer from '../componet/BankTransfer';
 import Income from '../componet/Income';
+import DateTimePicker from '@react-native-community/datetimepicker';
 const HomeScreen = ({ navigation }) => {
-    const [currentDate, setCurrentdate] = useState();
+    const [showdatePicker, setShowDatePicker] = useState(false);
+    const [date, setDate] = useState(new Date())
     const [operationmode, setOperationMode] = useState();
-    const showDatePicker = () => {
-        setCurrentdate(formatDate(new Date()));
-    }
+    const onChange = (event, selectedDate) => {
+        setShowDatePicker(false);
+        const currentDate = new Date(); // Current date
+        const minDate = new Date(); // Min date allowed (current date minus 30 days)
+        minDate.setDate(currentDate.getDate() - 30);
+        if (selectedDate && (selectedDate>currentDate || selectedDate < minDate)) {
+            return
+        }
+        setDate(selectedDate)
+    };
     return (
         <View style={{ backgroundColor: "#fff", flex: 1 }}>
             <View style={styles.container}>
                 <View >
                     <Input
-                        value={currentDate ? currentDate : ''}
+                        value={formatDate(date)}
                         placeholder='DD/MM/YYYY'
-                        inputStyle={{ textAlign: 'center',fontWeight:'bold'}}
+                        inputStyle={{ textAlign: 'center', fontWeight: 'bold' }}
                         disabled={true}
                         leftIcon={
                             <Icon
                                 type="font-awesome"
                                 name="calendar"
-                                onPress={() => showDatePicker()} />
+                                size={30}
+                                onPress={() => setShowDatePicker(true)} />
                         }
                     />
+                    {showdatePicker && (
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={date}
+                            mode="date"
+                            is24Hour={true}
+                            display="default"
+                            onChange={onChange}
+                        />
+                    )}
+
                 </View>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
                     <Button
@@ -46,9 +67,9 @@ const HomeScreen = ({ navigation }) => {
                     />
                 </View>
                 <View style={{ marginVertical: 8 }}>
-                    {operationmode === 'Expenses' ? <DaliyExpense navigation={navigation} currentDate={currentDate} /> : null}
-                    {operationmode === 'Transfer' ? <BankTransfer navigation={navigation} currentDate={currentDate} /> : null}
-                    {operationmode === 'Income' ? <Income navigation={navigation} currentDate={currentDate} /> : null}
+                    {operationmode === 'Expenses' ? <DaliyExpense navigation={navigation} currentDate={formatDate(date)} /> : null}
+                    {operationmode === 'Transfer' ? <BankTransfer navigation={navigation} currentDate={formatDate(date)} /> : null}
+                    {operationmode === 'Income' ? <Income navigation={navigation} currentDate={formatDate(date)} /> : null}
                 </View>
                 <StatusBar style='auto' />
             </View>

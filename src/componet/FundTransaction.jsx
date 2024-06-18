@@ -27,7 +27,7 @@ const FundTransaction = ({ item }) => {
           <ListItem.Subtitle>
             <View>
               <Text>Fund Type: {item.fundtype}</Text>
-              <Text>Blance Rs. {balanceCalculation(item.fundname, expens)}
+              <Text>Blance Rs. {balanceCalculation(item.fundname, expens).balance}
 
               </Text>
             </View>
@@ -36,8 +36,13 @@ const FundTransaction = ({ item }) => {
         </ListItem.Content>
       </ListItem>
       <Modal visible={showmodal}>
-        <Header color="secondary" />       
-        <Button color="secondary" title={item.fundname}/>        
+        <Header color="secondary" />
+        <Button color="secondary" title={item.fundname} />
+        <View style={styles.balnceContainer}>          
+          <Text>Cr. Rs. {balanceCalculation(item.fundname, expens).cr_blance}</Text>
+          <Text>Dr. Rs. {balanceCalculation(item.fundname, expens).dr_blance}</Text>
+          <Text>Rs. {balanceCalculation(item.fundname, expens).balance}</Text>
+        </View>
         <ScrollView style={{ paddingHorizontal: 8 }}>
           {
             expens.filter((eitem) => eitem.credit_to === item.fundname || eitem.debit_by === item.fundname).reverse().map((item, index) =>
@@ -58,4 +63,14 @@ const FundTransaction = ({ item }) => {
 
 export default FundTransaction
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  balnceContainer:{
+    flexDirection: 'row', 
+    justifyContent: 'space-between',
+    marginVertical:2,
+    paddingHorizontal:4,
+    backgroundColor:"#ddd",
+    paddingVertical:2, 
+  }
+
+})

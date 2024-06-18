@@ -5,11 +5,12 @@ import { Button, Icon, Input } from '@rneui/base';
 import { globalStyle } from '../common/style';
 import { DaliyExpenseContext } from '../context/dailyExpense';
 import { addExpense } from '../common/daliyExpenseControl';
+import { balanceCalculation } from '../common/commonFunction';
 
 export default function DaliyExpense({ navigation, currentDate }) {
-    const { expenseType, fundType, userData, getUserData } = useContext(DaliyExpenseContext)
+    const { expenseType, fundType, userData, getUserData,expens } = useContext(DaliyExpenseContext)
     const [expense, setExpense] = useState();
-    const [fund, setFund] = useState();
+    const [fund, setFund] = useState("Fund");
     const [desExpense, setdesExpense] = useState();
     const [cost, setCost] = useState();
     const submitExpense = () => {
@@ -59,7 +60,7 @@ export default function DaliyExpense({ navigation, currentDate }) {
                                 />
                             </View>
                             <View style={globalStyle.dorodownContainer}>
-                                <Text style={globalStyle.boldfont}>From </Text>
+                                <Text style={globalStyle.boldfont}>From {fund} </Text>                             
                                 <Dropdown
                                     style={globalStyle.dropdown}
                                     data={fundType}
@@ -90,7 +91,7 @@ export default function DaliyExpense({ navigation, currentDate }) {
                                 <Input
                                     value={cost}
                                     onChangeText={(text) => setCost(text)}
-                                    placeholder='Rs.'
+                                    placeholder={`${balanceCalculation(fund,expens).balance} in your ${fund} `}                                    
                                     inputMode='numeric'
                                     leftIcon={
                                         <Icon

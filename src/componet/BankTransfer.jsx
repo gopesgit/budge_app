@@ -1,16 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Alert, StyleSheet, Text, View } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { Dropdown } from 'react-native-element-dropdown'
 import { Input, Icon, Button } from '@rneui/base';
 import { globalStyle } from '../common/style';
 import { DaliyExpenseContext } from '../context/dailyExpense';
 import { addExpense } from '../common/daliyExpenseControl';
-
-
+import { balanceCalculation } from '../common/commonFunction';
 const BankTransfer = ({ navigation, currentDate }) => {
-    const { fundType, userData, getUserData } = useContext(DaliyExpenseContext)
-    const [drfund, setDRFund] = useState()
-    const [crfund, setCRFund] = useState()
+    const { fundType, userData, getUserData,expens } = useContext(DaliyExpenseContext)
+    const [drfund, setDRFund] = useState("Dr fund")
+    const [crfund, setCRFund] = useState("Cr Fund")
     const [cost, setCost] = useState();
     const [desExpense, setdesExpense] = useState();
     const submitTransfer = () => {
@@ -104,7 +103,7 @@ const BankTransfer = ({ navigation, currentDate }) => {
                         value={cost}
                         onChangeText={(text) => setCost(text)}
                         inputMode='numeric'
-                        placeholder='Rs.'
+                        placeholder={`${drfund} (Rs. ${balanceCalculation(drfund,expens).balance}) to ${crfund} (Rs. ${balanceCalculation(crfund,expens).balance})`}
                         leftIcon={
                             <Icon
                                 type="font-awesome"

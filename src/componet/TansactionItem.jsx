@@ -6,7 +6,7 @@ import { Collapse, CollapseBody, CollapseHeader } from 'accordion-collapse-react
 const TansactionItem = ({ item, deleteExpense }) => {
     const [expan, setExpan] = useState(false)
     return (
-        <Collapse style={styles.collapscontainer}>
+        <Collapse style={styles.collapscontainer} onToggle={()=> setExpan(!expan)} >
             <CollapseHeader>
                 <View style={styles.collaps}>
                     <View>
@@ -14,20 +14,15 @@ const TansactionItem = ({ item, deleteExpense }) => {
                     <Text>{item.date}</Text>
                     </View>
                     {item.expense_type === 'Opening Blance' ?
-                        <Icon
-                            color="#ddd"
-                            type="material-community"
-                            name="delete-off"
-                            size={30}                            
-                        />
+                       null
                         :
+                        expan &&
                         <Icon
                             color="#ff0000"
                             type="material-community"
                             name="delete"
                             size={30}
                             onPress={() => deleteExpense(item)}
-
                         />
 
                     }
@@ -64,45 +59,3 @@ const styles = StyleSheet.create({
     }
 })
 
-{/* <ListItem.Accordion
-        bottomDivider
-            content={
-                <>
-                    {item.expense_type === 'Opening Blance' ?
-                        <Icon
-                            color="#ddd"
-                            type="material-community"
-                            name="delete-off"
-                            size={35}                            
-                        />
-                        :
-                        <Icon
-                            color="#ff0000"
-                            type="material-community"
-                            name="delete"
-                            size={40}
-                            onPress={() => deleteExpense(item)}
-
-                        />
-
-                    }
-                    <ListItem.Content>
-                        <ListItem.Title style={globalStyle.boldfont}>{item.expense_type}</ListItem.Title>
-                        <ListItem.Subtitle>{item.date}</ListItem.Subtitle>
-                    </ListItem.Content>
-                </>
-
-            }
-            isExpanded={expan}
-            onPress={() => setExpan(!expan)}
-        >
-            <ListItem >
-                <ListItem.Content>
-                    <ListItem.Title style={globalStyle.redfontbold}>{item.description},Rs. {item.ammout}</ListItem.Title>
-                    <ListItem.Subtitle style={globalStyle.redfont}>
-                        {item.debit_by && `Debit from:${item.debit_by},`}
-                        {item.credit_to && `Credit To:${item.credit_to}`}
-                    </ListItem.Subtitle>
-                </ListItem.Content>
-            </ListItem>
-        </ListItem.Accordion> */}

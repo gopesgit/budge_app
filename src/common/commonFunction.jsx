@@ -18,5 +18,21 @@ export const balanceCalculation = (fundname,expens) => {
       dr_blance += amount
     }
   });
-  return (cr_blance - dr_blance);
+  return ({balance:Math.round(cr_blance - dr_blance),cr_blance,dr_blance});
 }
+export const balanceCalculationTransaction = (expens) => {
+  //console.log("KJ=>",expens);
+  let cr_blance = 0
+  let dr_blance = 0
+  expens.forEach(element => {
+    const amount = parseFloat(element.ammout);
+    if (element.credit_to) {
+      cr_blance += amount
+    }
+    if (element.debit_by) {
+      dr_blance += amount
+    }
+  });
+  return ({balance:Math.round(cr_blance - dr_blance),cr_blance,dr_blance});
+}
+//parseFloat(number.toFixed(2))
