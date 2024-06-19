@@ -12,7 +12,7 @@ const Income = ({ navigation, currentDate }) => {
     const [desIncome, setdesIncome] = useState();
     const [cost, setCost] = useState();
     const submitIncome = () => {
-        console.log({ crfund, currentDate, sourceincome, desIncome,cost });
+        //console.log({ crfund, currentDate, sourceincome, desIncome,cost });
         if (!crfund ||!desIncome || !cost || !currentDate || !sourceincome) {
             Alert.alert("Please fill all field")
             return

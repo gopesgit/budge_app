@@ -5,12 +5,17 @@ import HomeDrawer from './HomeDrawer'
 import { DaliyExpenseProvide } from '../context/dailyExpense'
 import ExpenseScreen from '../Screen/ExpenseScreen'
 import { Icon } from '@rneui/base'
+import HomeScreen from '../Screen/HomeScreen'
+import AddCRDRType from '../Screen/AddCRDRType'
+import Header from '../componet/Header'
 const TabNavi = createBottomTabNavigator()
 const HomeNavigation = () => {
   return (
     <DaliyExpenseProvide>
       <TabNavi.Navigator
-        screenOptions={{ headerShown: false }}
+        screenOptions={{
+          headerRight:()=><Header/>
+        }}
       >
         <TabNavi.Screen
           name="HomeTab"
@@ -18,8 +23,10 @@ const HomeNavigation = () => {
             tabBarIcon: ({ color, size }) => (
               <Icon name="home" size={size} color={color} />
             ),
+            headerShown:true,
           }}
-          component={HomeDrawer}
+
+          component={HomeScreen}
         />
         <TabNavi.Screen
         options={{
@@ -31,6 +38,17 @@ const HomeNavigation = () => {
         }}
         name="ExpenseTab"
         component={ExpenseScreen}
+        />
+        <TabNavi.Screen
+        options={{
+          title:"Fund",
+          headerShown:true,
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="currency-rupee" size={size} color={color} />
+          ),
+        }}
+        name="Add Fund Type"
+        component={AddCRDRType}
         />
       </TabNavi.Navigator>
     </DaliyExpenseProvide>

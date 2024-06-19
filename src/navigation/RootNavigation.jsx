@@ -2,12 +2,15 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import AuthNavigation from './AuthNavigation'
+import { AuthContext, AuthProvider } from '../context/authContex'
 
 const RootNavigation = () => {
   return (
-   <NavigationContainer>
-    <AuthNavigation/>
-   </NavigationContainer>
+    <NavigationContainer>
+      <AuthProvider>
+        <AuthNavigation />
+      </AuthProvider>
+    </NavigationContainer>
   )
 }
 

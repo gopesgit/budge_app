@@ -1,9 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { collection, getDocs, getFirestore, orderBy, query, where } from "firebase/firestore";
 import { firebaseapp } from "../firebase/configurFirebase";
-import ExpenseScreen from "../Screen/ExpenseScreen";
-import DaliyExpense from "../componet/DaliyExpense";
-
+import { AuthContext } from "./authContex";
 export const DaliyExpenseContext=createContext("")
 export const DaliyExpenseProvide=({children})=>{
     const [expenseType,setExpenseType]=useState()
@@ -11,9 +9,10 @@ export const DaliyExpenseProvide=({children})=>{
     const [fundType, setfundType] = useState()
     const [expens,setExpense]=useState();
     const [userData,setUserData]=useState();
+    const {user}=useContext(AuthContext);
     const db=getFirestore(firebaseapp)
     useEffect(()=>{
-        console.log("Use Effect");
+        //console.log("Use Effect",user);
         getExpenseTypeList()
         getIncomeTypeList()
         getUserData()
@@ -51,7 +50,7 @@ export const DaliyExpenseProvide=({children})=>{
     const getUserData=async ()=>{
         try {
             const expenseRef=await collection(db,"User")
-            const q = await query(expenseRef, where("name","==","Gopal Paul"))
+            const q = await query(expenseRef, where("userId","==",user.userId))
             const querySnapdhot = await getDocs(q)
             if (!querySnapdhot.empty) {
                 setfundType([])

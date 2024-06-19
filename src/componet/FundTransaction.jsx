@@ -38,13 +38,16 @@ const FundTransaction = ({ item }) => {
       <Modal visible={showmodal}>
         <Header color="secondary" />
         <Button color="secondary" title={item.fundname} />
-        <View style={styles.balnceContainer}>          
+        {expens && 
+        <View style={styles.balnceContainer}>                 
           <Text>Cr. Rs. {balanceCalculation(item.fundname, expens).cr_blance}</Text>
           <Text>Dr. Rs. {balanceCalculation(item.fundname, expens).dr_blance}</Text>
           <Text>Rs. {balanceCalculation(item.fundname, expens).balance}</Text>
+       
         </View>
+         }
         <ScrollView style={{ paddingHorizontal: 8 }}>
-          {
+          {expens && 
             expens.filter((eitem) => eitem.credit_to === item.fundname || eitem.debit_by === item.fundname).reverse().map((item, index) =>
               <View >
                 <TansactionItem item={item} key={index} deleteExpense={deleteExpense} />
